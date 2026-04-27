@@ -18,36 +18,39 @@ const ExternalLinkIcon = () => (
 
 interface ProjectCardProps {
   project: Project;
+  onClick: () => void;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onClick }: ProjectCardProps) {
   return (
-    <div className="group relative flex flex-col justify-between border border-gray-800 rounded-xl p-6 bg-[#0f0f0f] hover:border-gray-600 transition-colors h-full">
+    <div 
+      onClick={onClick}
+      className="group relative flex flex-col justify-between border border-gray-800 rounded-xl p-8 bg-[#0f0f0f] hover:border-emerald-500/30 hover:bg-emerald-500/[0.02] transition-all cursor-pointer h-full"
+    >
       <div>
-        <div className="flex justify-between items-start mb-4">
-          <Link href={`/projects/${project.slug}`} className="text-xl font-semibold text-gray-100 hover:text-white transition-colors">
+        <div className="flex justify-between items-start mb-6">
+          <h3 className="text-2xl font-bold text-gray-100 group-hover:text-emerald-400 transition-colors font-mono">
             {project.title}
-          </Link>
-          <div className="flex gap-3 text-gray-400">
+          </h3>
+          <div className="flex gap-4 text-gray-400">
             {project.githubLink && (
-              <a href={project.githubLink} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="GitHub Repository">
+              <button 
+                onClick={(e) => { e.stopPropagation(); window.open(project.githubLink, '_blank'); }} 
+                className="hover:text-white transition-colors" 
+                aria-label="GitHub Repository"
+              >
                 <GithubIcon />
-              </a>
-            )}
-            {project.demoLink && (
-              <a href={project.demoLink} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Live Demo">
-                <ExternalLinkIcon />
-              </a>
+              </button>
             )}
           </div>
         </div>
-        <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+        <p className="text-base text-gray-400 mb-8 leading-relaxed font-sans">
           {project.description}
         </p>
       </div>
-      <div className="flex flex-wrap gap-2 mt-auto">
+      <div className="flex flex-wrap gap-2.5 mt-auto">
         {project.techStack.map((tech) => (
-          <span key={tech} className="px-2 py-1 text-xs font-medium text-gray-300 bg-gray-800/50 rounded-md">
+          <span key={tech} className="px-3 py-1 text-xs font-semibold text-gray-300 bg-gray-800/80 rounded-md font-mono border border-gray-700/50">
             {tech}
           </span>
         ))}
