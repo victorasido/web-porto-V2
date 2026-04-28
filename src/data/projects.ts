@@ -15,122 +15,77 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "aura-neural-engine",
-    title: "AURA Neural Engine",
-    description: "A highly scalable distributed AI processing pipeline built with FastAPI and Celery to analyze vehicle inspection frames using YOLO models.",
-    techStack: ["Python", "FastAPI", "Celery", "Redis", "PostgreSQL", "Docker"],
-    infrastructure: ["Docker", "Google Cloud Platform", "Cloud Storage", "Cloud Run"],
-    githubLink: "https://github.com/victor/aura-neural-engine",
-    featured: true,
-    date: "2026-03-15",
-    architecture: "Microservices architecture with Celery workers for horizontal scaling. Implemented a task orchestration layer using Redis to manage frame processing priority.",
-    challenges: "Handling real-time frame extraction bottlenecks and ensuring atomic updates to damage counters during concurrent task executions.",
-    mermaidDiagram: `graph LR
-    A[Mobile Client] -->|POST /inspect| B(FastAPI Gateway)
-    B -->|Push Task| C{Redis Broker}
-    C --> D[Celery Worker 1]
-    C --> E[Celery Worker 2]
-    C --> F[Celery Worker N]
-    D & E & F -->|YOLO Inference| G[AI Model]
-    G -->|Write Results| H[(PostgreSQL)]
-    G -->|Store Frames| I[(GCS Bucket)]
-    H -->|Poll Results| A`,
-  },
-  {
     slug: "vehicle-inspection-platform",
     title: "Vehicle Inspection Platform",
-    description: "Backend architecture for real-time video ingestion, background processing, and similarity scoring for vehicle damages.",
-    techStack: ["Go", "gRPC", "PostgreSQL", "Kafka", "Redis"],
-    infrastructure: ["Docker", "Kubernetes", "GCP Compute Engine", "Cloud SQL"],
+    description: "A comprehensive AI-driven 'Data Flywheel' platform for vehicle damage analysis, similarity scoring, and automated dataset collection for YOLO training.",
+    techStack: ["Python", "FastAPI", "Celery", "Redis", "PostgreSQL", "React", "Expo"],
+    infrastructure: ["Docker", "Nginx Proxy", "Cloudflare R2 / S3", "Sentry"],
     githubLink: "https://github.com/victor/vehicle-inspection",
-    demoLink: "https://inspection.example.com",
     featured: true,
     date: "2026-04-10",
-    architecture: "Event-driven system using Kafka for asynchronous message passing between ingestion and analysis services. Used gRPC for low-latency internal communication.",
-    challenges: "Optimizing the similarity scoring algorithm to run within sub-second latency across a dataset of millions of historical inspection frames.",
+    architecture: "Asynchronous Inspection Engine (V2) utilizing Celery for fan-out/fan-in task orchestration. Features a 'Human-in-the-Loop' annotation bridge to transition from GPT-4o to local YOLOv8 models.",
+    challenges: "Architecting a seamless sync queue for offline-first mobile data collection and implementing an atomic 'Ground Truth' export pipeline for model training.",
     mermaidDiagram: `graph TD
-    A[Mobile App] -->|Upload Video| B(Ingestion Service - Go)
-    B -->|Publish Event| C{Kafka Topic: frames}
-    C --> D[Frame Extractor Worker]
-    D -->|Extracted Frames| E{Kafka Topic: analysis}
-    E --> F[Similarity Scorer]
-    E --> G[Damage Detector]
-    F & G -->|Write| H[(PostgreSQL - Cloud SQL)]
-    H -->|Read Results| A`,
+    subgraph Clients
+        A[Mobile App - Expo] -->|Media Upload| C
+        B[Admin Web - React] -->|Review / Correct| G
+    end
+
+    subgraph Backend Services
+        C(FastAPI Gateway) -->|Enqueue Task| D{Redis Broker}
+        D --> E[Celery Workers]
+    end
+
+    subgraph Storage & AI
+        E -->|AI Inference| I[GPT-4o / YOLOv8]
+        I -->|Results| G[(PostgreSQL)]
+        E -->|Object Storage| H[(S3 / Cloudflare R2)]
+        G -->|Export Dataset| J[YOLOv8 Training Bridge]
+    end`,
   },
   {
     slug: "word-signer-bot",
-    title: "Word Signer Bot",
-    description: "High-throughput Telegram bot for document processing, utilizing a robust SQLite WAL mode integration and async Telegram API client.",
-    techStack: ["Python", "Asyncio", "SQLite", "Telegram API"],
-    infrastructure: ["VPS (Ubuntu)", "Systemd Service", "Nginx Reverse Proxy"],
+    title: "Word Signer: Headless Bot",
+    description: "A high-performance automated document signing system (Word & PDF) featuring 'Smart Layout Intelligence' for precise, context-aware signature placement.",
+    techStack: ["Python", "Asyncio", "PyMuPDF", "LibreOffice", "SQLite", "Docker"],
+    infrastructure: ["Docker (Resource Limited)", "Nginx Webhook", "Ubuntu Server"],
     githubLink: "https://github.com/victor/word-signer-bot",
     featured: false,
     date: "2026-01-20",
-    architecture: "Single-process async architecture with persistent session management. Utilizes SQLite WAL mode to support high concurrency during document signing spikes.",
-    challenges: `Managing Telegram API rate limits while processing thousands of simultaneous document signing requests required a custom token-bucket throttler. Beyond rate limiting, the most critical edge cases were around input validation and format-specific processing:
-
-**PDF Files:** Must be validated for encryption and password protection before processing. Encrypted PDFs are rejected early with a user-friendly error, preventing downstream failures in the signing pipeline.
-
-**Word (.docx) Files:** Require a separate conversion flow. The bot first sanitizes the document (stripping macros for security), converts it to PDF via LibreOffice in headless mode, then applies the digital signature. Invalid or corrupted .docx files (e.g., broken XML structure) are caught at the conversion stage and returned with a specific error message, keeping the main async loop unblocked.`,
-    mermaidDiagram: `flowchart TD
-    A[User sends file] --> B{Validate File Type}
-    B -->|Invalid type| Z[Return: Unsupported Format]
-    B -->|PDF| C{Is PDF Encrypted?}
-    B -->|Word .docx| D[Sanitize: Strip Macros]
-    C -->|Yes| Y[Return: Encrypted PDF Error]
-    C -->|No| E[Sign PDF directly]
-    D --> F{Convert to PDF via LibreOffice}
-    F -->|Conversion failed| X[Return: Corrupted File Error]
-    F -->|Success| E
-    E --> G[Write to SQLite WAL]
-    G --> H[Send signed file to user]`,
+    architecture: "Implemented using Clean Architecture (App, Core, Infra, Shared layers). Features a hybrid session management system (In-memory RAM + SQLite BLOB) and a Semaphore-controlled conversion queue.",
+    challenges: "Developing 'Horizontal Raycasting' for perfect signature centering and managing heavy LibreOffice subprocesses within strict Docker RAM limits (1GB) to prevent OOM crashes.",
+    mermaidDiagram: `stateDiagram-v2
+    [*] --> WAIT_DOCX: /sign
+    WAIT_DOCX --> WAIT_SIGN: Send .docx / .pdf
+    WAIT_SIGN --> WAIT_ZONE_SELECT: Send Signature Image
+    WAIT_ZONE_SELECT --> Processing: Select Coordinate
+    state Processing {
+        direction LR
+        Queue --> Conversion
+        Conversion --> Injection
+    }
+    Processing --> [*]: Send Signed PDF
+    AnyState --> [*]: /cancel`,
   },
   {
-    slug: "distributed-cache",
-    title: "Distributed Cache Node",
-    description: "A lightweight, in-memory distributed cache built from scratch using Raft consensus algorithm for leader election and log replication.",
-    techStack: ["Go", "Raft", "TCP Sockets"],
-    infrastructure: ["Bare Metal", "Local Network Cluster"],
-    githubLink: "https://github.com/victor/dist-cache",
-    featured: false,
-    date: "2025-11-05",
-    architecture: "Custom implementation of the Raft consensus protocol. Includes leader election, log replication, and safety guarantees.",
-    challenges: "Implementing correctly the complex state transitions in the Raft algorithm to prevent split-brain scenarios during network partitions.",
-    mermaidDiagram: `graph TD
-    subgraph Raft Cluster
-        L[Leader Node] -->|Replicate Log| F1[Follower 1]
-        L -->|Replicate Log| F2[Follower 2]
-        F1 & F2 -->|ACK| L
-    end
-    C[Client] -->|SET/GET| L
-    L -->|Commit Entry| S[(In-Memory Store)]`,
-  },
-  {
-    slug: "auth-service",
-    title: "Identity & Access Management",
-    description: "Centralized OAuth2 and OIDC compliant authentication service handling JWT issuing, refreshing, and user session management.",
-    techStack: ["Node.js", "Express", "TypeScript", "Redis", "PostgreSQL"],
-    infrastructure: ["Docker", "Vercel Edge Functions", "Supabase PostgreSQL"],
+    slug: "ml-coach-bot",
+    title: "MLBB AI Coach: V4",
+    description: "A professional MLBB strategist bot leveraging GPT-4o and a local hero database to provide real-time drafting advice, counter-hero analysis, and meta-tier lists.",
+    techStack: ["Python", "Aiogram 3.x", "OpenAI GPT-4o", "Pandas", "FuzzyWuzzy"],
+    infrastructure: ["VPS (Ubuntu)", "Systemd Service", "JSON Caching"],
+    githubLink: "https://github.com/victor/ml-coach-bot",
     featured: true,
-    date: "2025-08-22",
-    architecture: "Stateless JWT-based authentication with Redis-backed session revocation (blacklisting). Implements standard OIDC flows.",
-    challenges: "Ensuring secure token rotation and handling race conditions during refresh token exchange under high load.",
-    mermaidDiagram: `sequenceDiagram
-    participant C as Client
-    participant A as Auth Service
-    participant R as Redis
-    participant DB as PostgreSQL
-
-    C->>A: POST /auth/login (credentials)
-    A->>DB: Validate user
-    DB-->>A: User record
-    A->>A: Sign Access Token (15m) + Refresh Token (7d)
-    A->>R: Store refresh token hash
-    A-->>C: { accessToken, refreshToken }
-    C->>A: POST /auth/refresh (refreshToken)
-    A->>R: Validate & rotate token
-    R-->>A: OK
-    A-->>C: New { accessToken, refreshToken }`,
-  }
+    date: "2026-04-28",
+    architecture: "Hybrid system combining local high-performance data with AI fallbacks. Implements a typo-tolerant search engine using FuzzyWuzzy and an AI Caching Layer to optimize API costs and response speed.",
+    challenges: "Maintaining a synchronized local-to-AI meta tier list and engineering complex prompts for multi-hero synergy analysis that fits within Telegram's message limits.",
+    mermaidDiagram: `flowchart TD
+    A[User Hero Query] --> B{Fuzzy Search}
+    B -->|Found| C{Check AI Cache}
+    B -->|Not Found| Z[Request Clarification]
+    C -->|Hit| D[Instant Response]
+    C -->|Miss| E[GPT-4o Analysis]
+    E --> F[Update Cache]
+    F --> D`,
+  },
 ];
+
