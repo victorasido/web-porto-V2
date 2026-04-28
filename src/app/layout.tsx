@@ -73,7 +73,7 @@ export default function RootLayout({
                 <div className="flex flex-wrap gap-8 text-lg font-mono font-bold">
                   <a href="https://github.com/victorasido" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors uppercase tracking-widest">GitHub</a>
                   <a href="https://linkedin.com/in/victorasido" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors uppercase tracking-widest">LinkedIn</a>
-                  <a href="/resume.pdf" download className="text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-widest">Resume</a>
+                  <a href="/CV_Victor_Asido_T.pdf" download className="text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-widest">Resume</a>
                 </div>
               </div>
               

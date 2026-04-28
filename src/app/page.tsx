@@ -43,7 +43,7 @@ export default function Home() {
           {/* CTA Row */}
           <div className="flex flex-wrap gap-5 items-center mt-6">
             <a
-              href="/resume.pdf"
+              href="/CV_Victor_Asido_T.pdf"
               download
               className="inline-flex items-center gap-3 px-10 py-5 bg-emerald-400 text-gray-950 font-bold font-mono text-lg rounded-sm hover:bg-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.3)] hover:shadow-[0_0_30px_rgba(52,211,153,0.6)] transition-all"
             >
