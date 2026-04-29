@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <body className={`${inter.variable} ${mono.variable} min-h-screen flex flex-col bg-[#0a0a0a] text-gray-200 antialiased`}>
         <header className="w-full border-b border-gray-800 sticky top-0 z-10 bg-[#0a0a0a]/80 backdrop-blur-sm">
           <div className="w-full px-6 md:px-16 lg:px-24 xl:px-32 py-6 flex justify-between items-center">

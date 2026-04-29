@@ -27,6 +27,14 @@ const ServerIcon = () => (
   </svg>
 );
 
+const PresentationIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>
+);
+
 interface ProjectDetailViewProps {
   project: Project;
   onClose: () => void;
@@ -83,6 +91,16 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
                   >
                     <ExternalLinkIcon />
                     Live Demo
+                  </a>
+                )}
+                {project.pptUrl && (
+                  <a
+                    href={project.pptUrl}
+                    download
+                    className="inline-flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                  >
+                    <PresentationIcon />
+                    Download PPT
                   </a>
                 )}
               </div>
@@ -155,6 +173,30 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
               <h3 className="text-2xl font-bold text-gray-100 font-mono">Key Challenges & Proof</h3>
               <div className="text-gray-400 leading-relaxed whitespace-pre-line text-lg bg-emerald-400/5 p-6 rounded-xl border border-emerald-400/10">
                 {project.challenges}
+              </div>
+            </section>
+          )}
+
+          {/* PPT Viewer Section */}
+          {project.pptUrl && (
+            <section className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold text-gray-100 font-mono">Project Presentation</h3>
+                <span className="text-xs text-gray-500 font-mono italic">Requires internet for preview</span>
+              </div>
+              <div className="relative w-full aspect-video bg-[#111] rounded-xl border border-gray-800 overflow-hidden group">
+                <iframe
+                  src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+                    typeof window !== 'undefined' ? window.location.origin + project.pptUrl : project.pptUrl
+                  )}`}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  className="w-full h-full"
+                >
+                  This browser does not support inline PDFs. Please download the PDF to view it: [Download PDF]
+                </iframe>
+                <div className="absolute inset-0 pointer-events-none border border-emerald-500/10 group-hover:border-emerald-500/20 transition-colors"></div>
               </div>
             </section>
           )}

@@ -19,7 +19,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="flex flex-col gap-32 py-4 md:py-12 w-full">
+    <div className="flex flex-col gap-24 md:gap-36 py-4 md:py-12 w-full">
       {/* Hero */}
       <section id="home" className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 pt-10 md:pt-20 items-center">
         <div className="flex flex-col gap-10">
@@ -69,7 +69,6 @@ export default function Home() {
               <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
               <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-              <span className="text-[10px] text-gray-500 ml-2 uppercase tracking-widest">victor_backend_srv</span>
             </div>
             
             {/* Terminal Content */}
@@ -120,6 +119,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-800/80 to-transparent opacity-80"></div>
+
       {/* Projects */}
       <section id="projects" className="flex flex-col gap-10">
         <div className="flex items-center justify-between border-b border-gray-800 pb-4">
@@ -142,14 +144,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-800/80 to-transparent opacity-80"></div>
+
       {/* Tech Stack */}
-      <section id="tech-stack" className="flex flex-col gap-8 pt-10">
+      <section id="tech-stack" className="flex flex-col gap-8">
         <div className="flex items-center justify-between border-b border-gray-800 pb-4">
           <h3 className="text-3xl font-bold tracking-tight text-gray-100 font-mono">
             Arsenal &amp; Tech Stack
           </h3>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-5">
           {[
             "Python", "Google Colab", "Looker Studio", "Google Data Studio", "Java", 
             "JavaScript", "Bun", "TypeScript", "PHP", "Laravel", "Angular", 
@@ -157,7 +162,7 @@ export default function Home() {
           ].map((tech) => (
             <span 
               key={tech} 
-              className="px-5 py-2.5 bg-[#121212] border border-gray-800 rounded-sm text-gray-300 font-mono text-sm hover:border-emerald-500/50 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all cursor-default shadow-sm"
+              className="px-6 py-3 bg-[#121212] border border-gray-700/80 rounded-md text-gray-200 font-mono text-base md:text-lg hover:border-emerald-500/60 hover:text-emerald-400 hover:bg-emerald-500/10 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:-translate-y-1 transition-all duration-300 cursor-default shadow-sm"
             >
               {tech}
             </span>

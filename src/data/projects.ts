@@ -11,6 +11,7 @@ export interface Project {
   architecture?: string;
   challenges?: string;
   mermaidDiagram?: string;
+  pptUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -18,7 +19,7 @@ export const projects: Project[] = [
     slug: "vehicle-inspection-platform",
     title: "Vehicle Inspection Platform",
     description: "A comprehensive AI-driven 'Data Flywheel' platform for vehicle damage analysis, similarity scoring, and automated dataset collection for YOLO training.",
-    techStack: ["Python", "FastAPI", "Celery", "Redis", "PostgreSQL", "React", "Expo"],
+    techStack: ["Python", "FastAPI", "Celery", "Redis", "PostgreSQL", "React", "Expo", "Docker"],
     infrastructure: ["Docker", "Nginx Proxy", "Cloudflare R2 / S3", "Sentry"],
     githubLink: "https://github.com/victorasido/car-detection-ai",
     featured: true,
@@ -66,12 +67,13 @@ export const projects: Project[] = [
     }
     Processing --> [*]: Send Signed PDF
     AnyState --> [*]: /cancel`,
+    pptUrl: "/ppt/word-signer-bot.pptx",
   },
   {
     slug: "ml-coach-bot",
     title: "MLBB AI Coach",
     description: "A professional MLBB strategist telegram bot leveraging GPT-4o and a local hero database to provide real-time drafting advice, counter-hero analysis, and meta-tier lists.",
-    techStack: ["Python", "Aiogram 3.x", "OpenAI GPT-4o", "Pandas", "FuzzyWuzzy"],
+    techStack: ["Python", "Aiogram 3.x", "OpenAI GPT-4o", "Pandas", "FuzzyWuzzy", "Docker"],
     infrastructure: ["VPS (Ubuntu)", "Systemd Service", "JSON Caching"],
     githubLink: "https://github.com/victorasido/tele-bot-v4",
     featured: true,
