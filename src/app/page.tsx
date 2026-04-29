@@ -25,19 +25,19 @@ export default function Home() {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
             <p className="text-sm md:text-base font-bold text-emerald-400 tracking-[0.2em] uppercase font-mono">
-               System status: Available
+               [ System Online ] — Open to Opportunities
             </p>
             <h1 className="text-7xl md:text-[7rem] leading-none font-bold tracking-tighter text-emerald-400 font-mono">
               Hi, I&apos;m<br/>Victor.
             </h1>
             <h2 className="text-3xl md:text-5xl font-semibold text-gray-100 font-mono mt-4 leading-tight">
-              Backend Engineer
+              Backend Engineer &amp; Systems Architect
             </h2>
           </div>
 
           <p className="text-xl md:text-2xl text-gray-400 leading-relaxed max-w-[90%]">
-            I specialize in designing and building highly scalable, distributed systems, and robust APIs.
-            Passionate about clean architecture, performance optimization, and reliable infrastructure.
+            I architect high-throughput async pipelines and distributed systems that don&apos;t buckle under pressure.
+            Every byte optimized. Every failure anticipated. Built to scale, designed to last.
           </p>
 
           {/* CTA Row */}
@@ -138,6 +138,29 @@ export default function Home() {
               project={project} 
               onClick={() => setSelectedProject(project)}
             />
+          ))}
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section id="tech-stack" className="flex flex-col gap-8 pt-10">
+        <div className="flex items-center justify-between border-b border-gray-800 pb-4">
+          <h3 className="text-3xl font-bold tracking-tight text-gray-100 font-mono">
+            Arsenal &amp; Tech Stack
+          </h3>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          {[
+            "Python", "Google Colab", "Looker Studio", "Google Data Studio", "Java", 
+            "JavaScript", "Bun", "TypeScript", "PHP", "Laravel", "Angular", 
+            "CSS", "PostgreSQL", "Oracle", "Git"
+          ].map((tech) => (
+            <span 
+              key={tech} 
+              className="px-5 py-2.5 bg-[#121212] border border-gray-800 rounded-sm text-gray-300 font-mono text-sm hover:border-emerald-500/50 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all cursor-default shadow-sm"
+            >
+              {tech}
+            </span>
           ))}
         </div>
       </section>
