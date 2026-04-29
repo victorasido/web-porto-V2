@@ -45,7 +45,7 @@ export default function Home() {
             <a
               href="/CV_Victor_Asido_T.pdf"
               download
-              className="inline-flex items-center gap-3 px-10 py-5 bg-emerald-400 text-gray-950 font-bold font-mono text-lg rounded-sm hover:bg-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.3)] hover:shadow-[0_0_30px_rgba(52,211,153,0.6)] transition-all"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-emerald-400 text-gray-950 font-bold font-mono text-lg rounded-sm hover:bg-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.3)] hover:shadow-[0_0_30px_rgba(52,211,153,0.6)] hover:-translate-y-1 transition-all duration-300"
             >
               <DownloadIcon />
               Download Resume
@@ -54,7 +54,7 @@ export default function Home() {
               href="https://github.com/victorasido"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-5 border-2 border-gray-700 rounded-sm text-gray-300 font-mono text-lg font-semibold hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 transition-all"
+              className="inline-flex items-center gap-3 px-8 py-5 border-2 border-gray-700 rounded-sm text-gray-300 font-mono text-lg font-semibold hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:-translate-y-1 transition-all duration-300"
             >
               GitHub
             </a>

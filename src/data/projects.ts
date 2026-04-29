@@ -73,7 +73,7 @@ export const projects: Project[] = [
     slug: "ml-coach-bot",
     title: "MLBB AI Coach",
     description: "A professional MLBB strategist telegram bot leveraging GPT-4o and a local hero database to provide real-time drafting advice, counter-hero analysis, and meta-tier lists.",
-    techStack: ["Python", "Aiogram 3.x", "OpenAI GPT-4o", "Pandas", "FuzzyWuzzy", "Docker"],
+    techStack: ["Python", "Aiogram 3.x", "OpenAI GPT-4o", "Pandas", "FuzzyWuzzy",],
     infrastructure: ["VPS (Ubuntu)", "Systemd Service", "JSON Caching"],
     githubLink: "https://github.com/victorasido/tele-bot-v4",
     featured: true,

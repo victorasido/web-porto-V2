@@ -51,7 +51,7 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
           </h2>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white transition-colors"
+            className="p-2 hover:bg-gray-800/80 rounded-full text-gray-400 hover:text-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:bg-emerald-500/10 transition-all duration-300"
             aria-label="Close"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -76,7 +76,7 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
                     href={project.githubLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center gap-2 hover:text-emerald-400 hover:-translate-y-0.5 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition-all duration-300 px-3 py-1.5 rounded-md hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/30"
                   >
                     <GithubIcon />
                     Repository
@@ -87,7 +87,7 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
                     href={project.demoLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center gap-2 hover:text-emerald-400 hover:-translate-y-0.5 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition-all duration-300 px-3 py-1.5 rounded-md hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/30"
                   >
                     <ExternalLinkIcon />
                     Live Demo
@@ -97,7 +97,7 @@ export function ProjectDetailView({ project, onClose }: ProjectDetailViewProps) 
                   <a
                     href={project.pptUrl}
                     download
-                    className="inline-flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                    className="inline-flex items-center gap-2 hover:text-emerald-400 hover:-translate-y-0.5 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition-all duration-300 px-3 py-1.5 rounded-md hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/30"
                   >
                     <PresentationIcon />
                     Download PPT

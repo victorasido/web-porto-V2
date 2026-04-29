@@ -64,16 +64,16 @@ export default function RootLayout({
                   </p>
                   <a 
                     href="mailto:victorasidotambunan@gmail.com" 
-                    className="text-2xl md:text-3xl font-mono font-bold text-gray-100 hover:text-emerald-400 transition-colors underline underline-offset-8 decoration-emerald-500/20 hover:decoration-emerald-400"
+                    className="inline-block text-2xl md:text-3xl font-mono font-bold text-gray-100 hover:text-emerald-400 hover:-translate-y-1 hover:drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-300 underline underline-offset-8 decoration-emerald-500/20 hover:decoration-emerald-400"
                   >
                     victorasidotambunan@gmail.com
                   </a>
                 </div>
                 
                 <div className="flex flex-wrap gap-8 text-lg font-mono font-bold">
-                  <a href="https://github.com/victorasido" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors uppercase tracking-widest">GitHub</a>
-                  <a href="https://linkedin.com/in/victorasido" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors uppercase tracking-widest">LinkedIn</a>
-                  <a href="/CV_Victor_Asido_T.pdf" download className="text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-widest">Resume</a>
+                  <a href="https://github.com/victorasido" target="_blank" rel="noreferrer" className="inline-block text-gray-400 hover:text-emerald-400 hover:-translate-y-1 hover:drop-shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all duration-300 uppercase tracking-widest">GitHub</a>
+                  <a href="https://linkedin.com/in/victorasido" target="_blank" rel="noreferrer" className="inline-block text-gray-400 hover:text-emerald-400 hover:-translate-y-1 hover:drop-shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all duration-300 uppercase tracking-widest">LinkedIn</a>
+                  <a href="/CV_Victor_Asido_T.pdf" download className="inline-block text-emerald-400 hover:text-emerald-300 hover:-translate-y-1 hover:drop-shadow-[0_0_10px_rgba(16,185,129,0.4)] transition-all duration-300 uppercase tracking-widest">Resume</a>
                 </div>
               </div>
               

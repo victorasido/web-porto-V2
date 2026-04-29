@@ -25,7 +25,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
   return (
     <div 
       onClick={onClick}
-      className="group relative flex flex-col justify-between border border-gray-800 rounded-xl p-8 bg-[#0f0f0f] hover:border-emerald-500/30 hover:bg-emerald-500/[0.02] transition-all cursor-pointer h-full"
+      className="group relative flex flex-col justify-between border border-gray-800 rounded-xl p-8 bg-[#0f0f0f] hover:border-emerald-500/50 hover:bg-emerald-500/[0.02] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-pointer h-full"
     >
       <div>
         <div className="flex justify-between items-start mb-6">
@@ -36,7 +36,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
             {project.githubLink && (
               <button 
                 onClick={(e) => { e.stopPropagation(); window.open(project.githubLink, '_blank'); }} 
-                className="hover:text-white transition-colors" 
+                className="hover:text-emerald-400 hover:-translate-y-1 hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.5)] transition-all duration-300" 
                 aria-label="GitHub Repository"
               >
                 <GithubIcon />
